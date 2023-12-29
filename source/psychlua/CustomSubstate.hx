@@ -6,13 +6,14 @@ class CustomSubstate extends MusicBeatSubstate
 {
 	public static var name:String = 'unnamed';
 	public static var instance:CustomSubstate;
-	
+
 	public static function implement(funk:FunkinLua)
-		{
-                #if LUA_ALLOWED
-		funk.set("openCustomSubstate", openCustomSubstate);
-		funk.set("closeCustomSubstate", closeCustomSubstate);
-		funk.set("insertToCustomSubstate", insertToCustomSubstate);
+	{
+		#if LUA_ALLOWED
+		var lua = funk.lua;
+		Lua_helper.add_callback(lua, "openCustomSubstate", openCustomSubstate);
+		Lua_helper.add_callback(lua, "closeCustomSubstate", closeCustomSubstate);
+		Lua_helper.add_callback(lua, "insertToCustomSubstate", insertToCustomSubstate);
 		#end
 	}
 	
